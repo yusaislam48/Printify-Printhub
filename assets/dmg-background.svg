@@ -1,0 +1,40 @@
+<svg width="540" height="380" viewBox="0 0 540 380" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background gradient -->
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f5f5f5;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#e0e0e0;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="540" height="380" fill="url(#bgGradient)"/>
+  
+  <!-- Header -->
+  <rect x="0" y="0" width="540" height="80" fill="#1976d2"/>
+  
+  <!-- Title -->
+  <text x="270" y="35" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="white">PrintiFy Print Hub</text>
+  <text x="270" y="55" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="white">Drag to Applications folder to install</text>
+  
+  <!-- App icon placeholder -->
+  <circle cx="130" cy="220" r="40" fill="#1976d2" stroke="#1565c0" stroke-width="2"/>
+  <text x="130" y="225" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">APP</text>
+  
+  <!-- Applications folder icon -->
+  <rect x="370" y="180" width="80" height="80" rx="10" fill="#4caf50" stroke="#45a049" stroke-width="2"/>
+  <text x="410" y="225" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">Applications</text>
+  
+  <!-- Arrow -->
+  <path d="M 200 220 L 340 220" stroke="#666" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+  
+  <!-- Arrow marker -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#666"/>
+    </marker>
+  </defs>
+  
+  <!-- Footer text -->
+  <text x="270" y="350" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#666">Desktop application for print booth operators</text>
+</svg> 

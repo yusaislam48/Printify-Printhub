@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PrintiFy Print Hub</title>
+    
+    <!-- Material Design Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Login Page -->
+    <div class="login-container" id="loginContainer">
+        <div class="login-card">
+            <div class="login-header">
+                <div class="login-logo">
+                    <span class="material-icons">print</span>
+                </div>
+                <h1>PrintiFy Print Hub</h1>
+                <p>Booth Manager Login</p>
+            </div>
+            
+            <form class="login-form" id="loginForm">
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <div class="input-field">
+                        <span class="material-icons input-icon">email</span>
+                        <input 
+                            type="email" 
+                            id="email" 
+                            name="email" 
+                            placeholder="Enter your email"
+                            value="booth1@printify.com"
+                            required
+                        >
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <div class="input-field">
+                        <span class="material-icons input-icon">lock</span>
+                        <input 
+                            type="password" 
+                            id="password" 
+                            name="password" 
+                            placeholder="Enter your password"
+                            value="Yu2521191"
+                            required
+                        >
+                        <button type="button" class="password-toggle" id="passwordToggle">
+                            <span class="material-icons">visibility</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <button type="submit" class="login-btn" id="loginBtn">
+                    <span class="btn-text">Sign In</span>
+                    <span class="btn-spinner" style="display: none;">
+                        <div class="spinner"></div>
+                    </span>
+                </button>
+                
+                <div class="login-error" id="loginError" style="display: none;">
+                    <span class="material-icons">error</span>
+                    <span class="error-message"></span>
+                </div>
+            </form>
+            
+            <div class="login-footer">
+                <p>Contact your administrator if you need access</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main App Container (hidden initially) -->
+    <div class="app-container" id="appContainer" style="display: none;">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="header-content">
+                <div class="header-left">
+                    <span class="material-icons header-icon">print</span>
+                    <h1 class="app-title">PrintiFy Print Hub</h1>
+                </div>
+                <div class="header-right">
+                    <div class="user-info" id="userInfo">
+                        <span class="material-icons">person</span>
+                        <span class="user-name" id="userName"></span>
+                    </div>
+                    <button class="icon-button" id="dashboardBtn" title="Dashboard">
+                        <span class="material-icons">dashboard</span>
+                    </button>
+                    <button class="icon-button" id="testPrintBtn" title="Test Printer">
+                        <span class="material-icons">print</span>
+                    </button>
+                    <span class="app-version" id="appVersion">v1.0.0</span>
+                    <button class="icon-button" id="logoutBtn" title="Logout">
+                        <span class="material-icons">logout</span>
+                    </button>
+                    <button class="icon-button" id="quitBtn" title="Quit Application">
+                        <span class="material-icons">close</span>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Booth Information Section -->
+            <section class="booth-info-section">
+                <div class="booth-info-grid">
+                    <div class="booth-info-card">
+                        <div class="info-icon">
+                            <span class="material-icons">store</span>
+                        </div>
+                        <div class="info-content">
+                            <h3 id="displayBoothName">Loading...</h3>
+                            <p>Booth Name</p>
+                        </div>
+                    </div>
+                    <div class="booth-info-card">
+                        <div class="info-icon">
+                            <span class="material-icons">location_on</span>
+                        </div>
+                        <div class="info-content">
+                            <h3 id="displayBoothLocation">Loading...</h3>
+                            <p>Location</p>
+                        </div>
+                    </div>
+                    <div class="booth-info-card">
+                        <div class="info-icon">
+                            <span class="material-icons">description</span>
+                        </div>
+                        <div class="info-content">
+                            <h3 id="displayPaperCount">Loading...</h3>
+                            <p>Pages Available</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Central Search Section -->
+            <section class="central-search-section">
+                <div class="search-container">
+                    <div class="search-header">
+                        <h1>Student Print Jobs</h1>
+                        <p>Scan RFID card or enter Student ID to search for print jobs</p>
+                    </div>
+                    
+                    <div class="search-input-wrapper">
+                    <div class="search-input-container">
+                            <span class="material-icons search-icon">search</span>
+                            <input 
+                                type="text" 
+                                id="searchInput" 
+                                placeholder="Scan RFID or enter Student ID..."
+                                maxlength="10"
+                                autocomplete="off"
+                                autofocus
+                            >
+                            <div class="search-loading" id="searchLoading" style="display: none;">
+                                <div class="spinner-small"></div>
+                            </div>
+                        </div>
+                        <div class="search-help">
+                            <span class="material-icons">info</span>
+                            <span>Student ID: 7 digits | RFID: 10 digits starting with 0</span>
+                            <button id="testRescanBtn" style="margin-left: 20px; padding: 4px 8px; background: #667eea; color: white; border: none; border-radius: 4px; font-size: 12px; cursor: pointer;">Test Rescan</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Search Results Popup -->
+            <div class="search-popup" id="searchPopup" style="display: none;">
+                <div class="popup-overlay" id="popupOverlay"></div>
+                <div class="popup-content">
+                    <div class="popup-header">
+                        <div class="student-info">
+                            <h3 id="popupStudentName">Student Name</h3>
+                        <div class="points-display">
+                            <span class="material-icons">account_balance_wallet</span>
+                                <span>Points: <span id="popupUserPoints">0</span></span>
+                            </div>
+                            <div class="scan-instruction">
+                                <span class="material-icons">nfc</span>
+                                <span>Scan again above or use Quick Print below</span>
+                                <div class="scanning-indicator" id="scanningIndicator">
+                                    <span class="material-icons">radio_button_checked</span>
+                                    <span>Listening for scan...</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="popup-timer">
+                            <span class="material-icons">timer</span>
+                            <span id="popupTimer">30</span>s
+                        </div>
+                    </div>
+                    
+                    <div class="popup-body">
+                        <!-- Manual Print Trigger -->
+                        <div class="manual-print-section">
+                            <div class="manual-print-header">
+                                <span class="material-icons">touch_app</span>
+                                <span>Quick Print</span>
+                            </div>
+                            <div class="manual-print-input">
+                                <input 
+                                    type="text" 
+                                    id="manualPrintInput" 
+                                    placeholder="Scan RFID or click Print First Job button..."
+                                    maxlength="10"
+                                    autocomplete="off"
+                                >
+                                <button id="manualPrintBtn" class="btn btn-primary">
+                                    <span class="material-icons">print</span>
+                                    Print First Job
+                                </button>
+                                <button id="printNowBtn" class="btn btn-secondary">
+                                    <span class="material-icons">flash_on</span>
+                                    Print Now
+                                </button>
+                    </div>
+                </div>
+
+                        <div class="jobs-grid" id="popupJobsList">
+                        <!-- Jobs will be populated here -->
+                        </div>
+
+                        <div class="no-jobs-message" id="noJobsMessage" style="display: none;">
+                            <span class="material-icons">inbox</span>
+                            <h4>No Print Jobs Found</h4>
+                            <p>This student has no pending print jobs.</p>
+                        </div>
+                    </div>
+                </div>
+                </div>
+        </main>
+
+        <!-- Dashboard Section -->
+        <section class="dashboard-section" id="dashboardSection" style="display: none;">
+            <div class="dashboard-header">
+                <div class="dashboard-title">
+                    <button class="icon-button back-btn" id="backToHubBtn" title="Back to Print Hub">
+                        <span class="material-icons">arrow_back</span>
+                    </button>
+                    <h2>Booth Manager Dashboard</h2>
+                </div>
+                <button class="icon-button" id="refreshDashboardBtn" title="Refresh">
+                    <span class="material-icons">refresh</span>
+                </button>
+            </div>
+
+            <!-- Dashboard Content -->
+            <div class="dashboard-content">
+                <!-- Booth Information Card -->
+                <div class="dashboard-card booth-info-card">
+                    <div class="card-header">
+                        <h3>Booth Information</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <span class="material-icons">person</span>
+                                <div class="info-details">
+                                    <label>Manager Name</label>
+                                    <span id="dashboardManagerName">Loading...</span>
+                                </div>
+                            </div>
+                            <div class="info-item">
+                                <span class="material-icons">store</span>
+                                <div class="info-details">
+                                    <label>Booth Name</label>
+                                    <span id="dashboardBoothName">Loading...</span>
+                                </div>
+                            </div>
+                            <div class="info-item">
+                                <span class="material-icons">location_on</span>
+                                <div class="info-details">
+                                    <label>Location</label>
+                                    <span id="dashboardBoothLocation">Loading...</span>
+                                </div>
+                            </div>
+                            <div class="info-item">
+                                <span class="material-icons">confirmation_number</span>
+                                <div class="info-details">
+                                    <label>Booth Number</label>
+                                    <span id="dashboardBoothNumber">Loading...</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Paper Management Card -->
+                <div class="dashboard-card paper-management-card">
+                    <div class="card-header">
+                        <h3>Paper Management</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="paper-status">
+                            <div class="paper-level-container">
+                                <div class="paper-level-info">
+                                    <div class="paper-level-label">
+                                        <span class="material-icons">description</span>
+                                        Paper Level
+                                    </div>
+                                    <div class="paper-level-text">
+                                        <span id="dashboardLoadedPaper">0</span> / <span id="dashboardPaperCapacity">0</span> sheets
+                                    </div>
+                                </div>
+                                <div class="paper-level-bar">
+                                    <div class="paper-level-fill" id="dashboardPaperLevelFill"></div>
+                                </div>
+                                <div class="paper-level-percentage" id="dashboardPaperPercentage">0%</div>
+                            </div>
+                        </div>
+                        <div class="paper-actions">
+                            <button class="btn btn-primary" id="addPaperBtn">
+                                <span class="material-icons">add</span>
+                                Add Paper
+                            </button>
+                            <button class="btn btn-secondary" id="removePaperBtn">
+                                <span class="material-icons">remove</span>
+                                Remove Paper
+                    </button>
+                            <button class="btn btn-secondary" id="setPaperBtn">
+                                <span class="material-icons">edit</span>
+                                Set Count
+                    </button>
+                </div>
+            </div>
+        </div>
+
+                <!-- Printer Information Card -->
+                <div class="dashboard-card printer-info-card">
+                    <div class="card-header">
+                        <h3>Printer Information</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <span class="material-icons">print</span>
+                                <div class="info-details">
+                                    <label>Printer Name</label>
+                                    <span id="dashboardPrinterName">Loading...</span>
+                                </div>
+                            </div>
+                            <div class="info-item">
+                                <span class="material-icons">devices</span>
+                                <div class="info-details">
+                                    <label>Model</label>
+                                    <span id="dashboardPrinterModel">Loading...</span>
+                                </div>
+                            </div>
+                            <div class="info-item">
+                                <span class="material-icons">check_circle</span>
+                                <div class="info-details">
+                                    <label>Status</label>
+                                    <span class="status-active">Active</span>
+                                </div>
+                            </div>
+                            <div class="info-item">
+                                <span class="material-icons">schedule</span>
+                                <div class="info-details">
+                                    <label>Last Updated</label>
+                                    <span id="dashboardLastUpdated">Just now</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions Card -->
+                <div class="dashboard-card quick-actions-card">
+                    <div class="card-header">
+                        <h3>Quick Actions</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="quick-actions-grid">
+                            <button class="quick-action-btn" id="dashboardTestPrintBtn">
+                                <span class="material-icons">print</span>
+                                <span>Test Print</span>
+                            </button>
+                            <button class="quick-action-btn" id="dashboardRefreshBtn">
+                                <span class="material-icons">refresh</span>
+                                <span>Refresh Data</span>
+                            </button>
+                            <button class="quick-action-btn" id="viewLogsBtn">
+                                <span class="material-icons">list_alt</span>
+                                <span>View Logs</span>
+                            </button>
+                            <button class="quick-action-btn" id="backToHubBtn2">
+                                <span class="material-icons">home</span>
+                                <span>Back to Hub</span>
+                            </button>
+                        </div>
+                </div>
+                </div>
+            </div>
+        </section>
+        </div>
+
+    <!-- Paper Update Modal -->
+    <div class="modal" id="paperUpdateModal" style="display: none;">
+            <div class="modal-content modal-small">
+                <div class="modal-header">
+                <h3 id="paperModalTitle">Update Paper Count</h3>
+                </div>
+                <div class="modal-body">
+                <div class="paper-update-content">
+                    <div class="form-group">
+                        <label for="paperOperation">Operation</label>
+                        <select class="form-input" id="paperOperation">
+                            <option value="add">Add Paper</option>
+                            <option value="remove">Remove Paper</option>
+                            <option value="set">Set Exact Count</option>
+                        </select>
+                        </div>
+                    <div class="form-group">
+                        <label for="paperAmount">Amount</label>
+                        <input type="number" class="form-input" id="paperAmount" min="1" placeholder="Enter amount">
+                    </div>
+                    <div class="paper-operation-info" id="paperOperationInfo">
+                        <span class="material-icons">info</span>
+                        <span>Add the specified amount to current paper count</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                <button class="btn btn-secondary" id="cancelPaperUpdateBtn">Cancel</button>
+                <button class="btn btn-primary" id="confirmPaperUpdateBtn">Update</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay" style="display: none;">
+        <div class="loading-content">
+            <div class="spinner"></div>
+            <p id="loadingMessage">Loading...</p>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Scripts -->
+    <script src="renderer.js"></script>
+</body>
+</html> 
